@@ -10,25 +10,22 @@ createApp({
     data(){
         return{
             listEmail: [],
-            myPromise: axios.get("https://flynn.boolean.careers/exercises/api/random/mail")
         }
     },
     methods:{
         getEmail: function(){
+            const arrayListEmail = []
             for(let i = 0 ; i < 10 ; i++ ){
-                this.listEmail.push(this.myPromise);
+                this.listEmail.push(axios.get("https://flynn.boolean.careers/exercises/api/random/mail"));
                 console.log(this.listEmail);
+                Promise.all(this.listEmail).then(function(risultati){
+                    arrayListEmail.push(risultati[i].data.response);
+                })
             }
         },
-        getResult: function(){
-            Promise.all(this.listEmail).then(function(risultati){
-                console.log(risultati);
-            })
-        }
     },
     created(){
-        this.getEmail(),
-        this.getResult()
+        this.getEmail()
     }
 }).mount("#app");
 
