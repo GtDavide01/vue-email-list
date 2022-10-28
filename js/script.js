@@ -16,10 +16,10 @@ createApp({
         getEmail: function(){
             const arrayListEmail = []
             for(let i = 0 ; i < 10 ; i++ ){
-                this.listEmail.push(axios.get("https://flynn.boolean.careers/exercises/api/random/mail"));
-                console.log(this.listEmail);
-                Promise.all(this.listEmail).then(function(risultati){
-                    arrayListEmail.push(risultati[i].data.response);
+                arrayListEmail.push(axios.get("https://flynn.boolean.careers/exercises/api/random/mail"));
+                console.log(arrayListEmail);
+                Promise.all(arrayListEmail).then((risultati)=>{
+                    this.listEmail.push(risultati[i].data.response);
                 })
             }
         },
